@@ -137,14 +137,6 @@ class RNUpdate extends Component {
 
         this.filePath = `${RNFS.ExternalDirectoryPath}/${filename}${version}.apk`
 
-        // 检查包是否已经下载过，如果有，则直接安装
-        let exist = await RNFS.exists(this.filePath)
-        if (exist) {
-            RNUpdateApp.install(this.filePath)
-            this.hideModal()
-            return
-        }
-
         // 下载apk并安装
         RNFS.downloadFile({
             fromUrl: url,
