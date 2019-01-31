@@ -187,6 +187,7 @@ class RNUpdate extends Component {
     updateApp = () => {
         // 如果已经开始下载
         if (this.loading) return
+        this.loading = true
         // 如果是android
         if (!isIOS) {
             this.androidUpdate()
@@ -247,39 +248,6 @@ class RNUpdate extends Component {
         )
     }
 
-    renderCloseBtn = () => {
-        let {closeImage, updateBoxWidth, updateBoxHeight} = this.props
-        return (
-            <View
-                style={{
-                    position: "absolute",
-                    right: (width - updateBoxWidth) / 2 - 16,
-                    top: (height - updateBoxHeight) / 2 - 16,
-                    zIndex: 1,
-                    width: 32,
-                    height: 32,
-                    backgroundColor: "#e6e6e6",
-                    borderRadius: 16
-                }}
-            >
-                <TouchableOpacity
-                    onPress={this.hideModal}
-                    style={{
-                        width: 32,
-                        height: 32,
-                        alignItems: "center",
-                        justifyContent: "center"
-                    }}
-                >
-                    <Image
-                        source={closeImage}
-                        style={{width: 20, height: 20}}
-                    />
-                </TouchableOpacity>
-            </View>
-        )
-    }
-
     renderBanner = () => {
         let {bannerImage, bannerWidth, bannerHeight, bannerResizeMode} = this.props
         return (
@@ -315,7 +283,6 @@ class RNUpdate extends Component {
                 }}
             >
                 <View style={styles.wrap}>
-                    {this.renderCloseBtn()}
                     <View
                         style={[
                             styles.innerBox,
